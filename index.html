@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>click me if you can</title>
+</head>
+
+<style type="text/css">
+  body {
+    font-size: 16px;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  #container {
+    position: relative;
+    border: 1px solid #333;
+    margin: 0 auto;
+    width: 500px;
+    height: 500px;
+  }
+
+  #bad_guy,
+  #other_bad_guy {
+    display: flex;
+    align-items: center;
+    transition: 0.1s ease-in;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-color: blueviolet;
+    height: 40px;
+    font-weight: 700;
+    line-height: 0.86rem;
+    width: 40px;
+    text-align: center;
+    color: #fff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  #other_bad_guy {
+    height: 70px;
+    width: 70px;
+    padding: 10px;
+    font-size: 0.8rem;
+    background-color: brown;
+  }
+</style>
+
+<body>
+  <h2>click me if you can</h2>
+  <div id="container">
+    <div id="bad_guy" style="top: 40%; left: 10%;" onmouseover="changeBadGuyPosition()" onclick="youWin()">
+      click me
+    </div>
+    <div id="other_bad_guy" onmouseover="changeBadGuyPosition(true)" onclick="youWin()">
+      other bad guy
+    </div>
+  </div>
+</body>
+
+<script>
+
+  function getRandomPosition() {
+    return Math.floor(Math.random() * (100 - 1 + 1) + 1); //get random position relative 1 - 100
+  }
+
+  function youWin() {
+    alert("You can click me :(")
+  }
+
+  function changeBadGuyPosition(other_bad_guy = false) {
+    let el = document.getElementById("bad_guy");
+    if (other_bad_guy) {
+      el = document.getElementById("other_bad_guy");
+    }
+    const x_axis = getRandomPosition();
+    const y_axis = getRandomPosition();
+
+    const offset = (other_bad_guy) ? '70px' : '40px';
+    el.style.top = y_axis < 50 ? `${y_axis}%` : `calc(${y_axis}% - ${offset})`;
+    el.style.left = x_axis < 50 ? `${x_axis}%` : `calc(${x_axis}% - ${offset})`;
+  }
+
+</script>
+
+</html>
